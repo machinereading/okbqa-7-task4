@@ -20,15 +20,15 @@ Therefore, in this task, our goal is to develop various models to learn and extr
 - 자동 검출 : 위키피디아 텍스트 상 Wikilink 정보, Entity Linking 결과
 - Human Annotation : 자동 검출되지 않은 추가적인 개체들, 자동 검출된 개체 중 틀린 것 제거
 
-2. Co-reference resolution: 이 데이터셋은 Pronoun detection, Co-reference resolution 총 2가지 Task를 수행할 수 있는 데이터셋입니다. 문단 내 등장한 대명사, 개체들의 Grouping을 할 수 있는 정보를 포함하고 있습니다.
+2. Co-reference resolution(CR): 이 데이터셋은 Pronoun detection, Co-reference resolution 총 2가지 Task를 수행할 수 있는 데이터셋입니다. 문단 내 등장한 대명사, 개체들의 Grouping을 할 수 있는 정보를 포함하고 있습니다.
 - 자동 검출 : 대명사 후보
 - Human Annotation : 자동 검출된 대명사 후보와 ELD에서 추가 태깅된 개체들의 동일 개체 선행사를 발견
 
-3. Zero-anaphora detection: 이 데이터셋은 Intra-sentential problem, Inter-sentential problem 둘 모두를 풀 수 있는 데이터셋입니다. Case role 중 'nominative' 주격만 대상으로 합니다. 문단 내 등장한 주격 생략된 서술어 정보와 'antecedent' 선행사 정보를 포함하고 있습니다.
+3. Zero-anaphora detection(ZA): 이 데이터셋은 Intra-sentential problem, Inter-sentential problem 둘 모두를 풀 수 있는 데이터셋입니다. Case role 중 'nominative' 주격만 대상으로 합니다. 문단 내 등장한 주격 생략된 서술어 정보와 'antecedent' 선행사 정보를 포함하고 있습니다.
 - 자동 검출: 주격이 생략된 서술어
 - Human Annotation: 자동 검출된 서술어에 대해 생략된 주격을 발견
 
-4. Relation Extraction: 이 데이터셋은 Distant Supervision(DS) 데이터에서 Noise filtering 문제를 풀 수 있는 데이터셋입니다. DS labeling 된 결과는 일종의 트리플로, relation의 정의문을 이용해 트리플을 자연언어 질문 형태로 변환한 다음, 작업자는 주어진 문단과 자연언어 질문을 읽고 해당 문단으로부터 알 수 있는 사실이며 그것이 '참'인지 '거짓'인지를 태깅한 정보를 포함하고 있습니다.
+4. Relation Extraction(RE): 이 데이터셋은 Distant Supervision(DS) 데이터에서 Noise filtering 문제를 풀 수 있는 데이터셋입니다. DS labeling 된 결과는 일종의 트리플로, relation의 정의문을 이용해 트리플을 자연언어 질문 형태로 변환한 다음, 작업자는 주어진 문단과 자연언어 질문을 읽고 해당 문단으로부터 알 수 있는 사실이며 그것이 '참'인지 '거짓'인지를 태깅한 정보를 포함하고 있습니다.
 - 자동 검출: Distant Supervision
 - Human Annotation: 주어진 자연언어 질문에 T/F 응답
 
