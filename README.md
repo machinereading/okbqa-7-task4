@@ -51,7 +51,7 @@ Therefore, in this task, our goal is to develop various models to learn and extr
     - st: entityTagged 상에서의 개체 시작 Idx
     - en: entityTagged 상에서의 개체 종료 Idx
     
-'''
+```
 {
 	"entityTagged": "자녀. [필리포]는 [1739년] [10월_25일] [루이_15세]의 딸 [프랑스의_엘리사베타]와 결혼했다.",
 	"globalSId": [2364492, 2364493],
@@ -116,7 +116,7 @@ Therefore, in this task, our goal is to develop various models to learn and extr
 	"plainText": "자녀. 필리포는 1739년 10월 25일 루이 15세의 딸 엘리사베타와 결혼했다.",
 	"mentionTagged": "자녀. [필리포]는 [1739년] [10월 25일] [루이 15세]의 딸 [엘리사베타]와 결혼했다."
 }
-'''
+```
 
 ## Evaluation results (baseline)
 to be announced
