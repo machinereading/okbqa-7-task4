@@ -33,7 +33,90 @@ Therefore, in this task, our goal is to develop various models to learn and extr
 - Human Annotation: 주어진 자연언어 질문에 T/F 응답
 
 ## Format
-TBD
+모든 데이터는 JSON 형태로 제공됩니다.
+
+1. Entity Linking
+* plainText: 원본 텍스트
+* mentionedTagged: Entity Mention의 Boundary가 []로 태깅된 텍스트
+* entityTagged: Entity Mention을 개체명으로 변경한 []로 태깅된 텍스트
+* wikiPageId: 원본 텍스트의 위키피디아 페이지 ID
+* pIdx: 원본 텍스트의 위키피디아 문단 ID
+* entities: 개체 태깅 정보
+    - e_type: 개체의 대분류, "WIKILINK", "ELU", "NEW" 3가지 속성을 가지며, 각각 위키피디아 위키링크, 자동 개체 연결, 사람 신규 태깅을 의미한다.
+    - keyword: 개체명
+    - ne_type: Named Entity Type (PLOMT)
+    - kbox_types: 개체의 DBpedia Ontology Type
+    - st_mention: plainText 상에서의 개체 시작 Idx (character)
+    - en_mention: plainText 상에서의 개체 종료 Idx (character)
+    - st: entityTagged 상에서의 개체 시작 Idx
+    - en: entityTagged 상에서의 개체 종료 Idx
+    
+'''
+{
+	"entityTagged": "자녀. [필리포]는 [1739년] [10월_25일] [루이_15세]의 딸 [프랑스의_엘리사베타]와 결혼했다.",
+	"globalSId": [2364492, 2364493],
+	"entities": [{
+		"kbox_types": ["SoccerPlayer", "SportsManager", "Agent", "Person", "SoccerManager", "Athlete"],
+		"st": 4,
+		"en_mention": 7,
+		"ancestor": "",
+		"eIdx": 0,
+		"st_mention": 4,
+		"en": 9,
+		"ne_type": "PERSON",
+		"keyword": "[필리포]",
+		"e_type": "NEW"
+	}, {
+		"kbox_types": ["Year", "TimePeriod"],
+		"st": 11,
+		"en_mention": 14,
+		"ancestor": "",
+		"eIdx": 1,
+		"st_mention": 9,
+		"en": 18,
+		"ne_type": "TIME",
+		"keyword": "[1739년]",
+		"e_type": "WIKILINK"
+	}, {
+		"kbox_types": ["NULL"],
+		"st": 19,
+		"en_mention": 22,
+		"ancestor": "",
+		"eIdx": 2,
+		"st_mention": 15,
+		"en": 28,
+		"ne_type": "TIME",
+		"keyword": "[10월_25일]",
+		"e_type": "WIKILINK"
+	}, {
+		"kbox_types": ["Royalty", "Monarch", "BritishRoyalty", "Agent", "Person"],
+		"st": 29,
+		"en_mention": 29,
+		"ancestor": "",
+		"eIdx": 3,
+		"st_mention": 23,
+		"en": 37,
+		"ne_type": "PERSON",
+		"keyword": "[루이_15세]",
+		"e_type": "WIKILINK"
+	}, {
+		"kbox_types": ["Royalty", "BritishRoyalty", "Agent", "Person"],
+		"st": 41,
+		"en_mention": 38,
+		"ancestor": "",
+		"eIdx": 4,
+		"st_mention": 33,
+		"en": 53,
+		"ne_type": "PERSON",
+		"keyword": "[프랑스의_엘리사베타]",
+		"e_type": "WIKILINK"
+	}],
+	"wikiPageId": 585033,
+	"pIdx": 3,
+	"plainText": "자녀. 필리포는 1739년 10월 25일 루이 15세의 딸 엘리사베타와 결혼했다.",
+	"mentionTagged": "자녀. [필리포]는 [1739년] [10월 25일] [루이 15세]의 딸 [엘리사베타]와 결혼했다."
+}
+'''
 
 ## Evaluation results (baseline)
 to be announced
