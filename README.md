@@ -42,6 +42,7 @@ Therefore, in this task, our goal is to develop various models to learn and extr
 * wikiPageId: 원본 텍스트의 위키피디아 페이지 ID
 * pIdx: 원본 텍스트의 위키피디아 문단 ID
 * entities: 개체 태깅 정보
+    - eIdx: 개체의 ID
     - e_type: 개체의 대분류, "WIKILINK", "ELU", "NEW" 3가지 속성을 가지며, 각각 위키피디아 위키링크, 자동 개체 연결, 사람 신규 태깅을 의미한다.
     - keyword: 개체명
     - ne_type: Named Entity Type (PLOMT)
@@ -51,6 +52,7 @@ Therefore, in this task, our goal is to develop various models to learn and extr
     - st: entityTagged 상에서의 개체 시작 Idx
     - en: entityTagged 상에서의 개체 종료 Idx
     
+##### Example
 ```
 {
 	"entityTagged": "자녀. [필리포]는 [1739년] [10월_25일] [루이_15세]의 딸 [프랑스의_엘리사베타]와 결혼했다.",
@@ -117,6 +119,187 @@ Therefore, in this task, our goal is to develop various models to learn and extr
 	"mentionTagged": "자녀. [필리포]는 [1739년] [10월 25일] [루이 15세]의 딸 [엘리사베타]와 결혼했다."
 }
 ```
+
+2. Co-reference resolution
+ELD의 필드와 동일한 정보는 생략, 추가된 정보만 기재
+* entities: 개체 태깅 정보
+    - ancestor: 해당 개체의 상호 참조 정보, pIdx-eIdx 형태로 표현
+* pronouns: 문단 내 대명사 정보
+    - proIdx: 대명사 ID
+    - keyword: 대명사 명
+    - ancestor: 해당 대명사의 상호 참조 정보, pIdx-eIdx 형태로 표현
+
+```
+{
+	"entityTagged": "[필리포 1세](Felipe I de Parma, [1720년] [3월_15일] ~ [1765년] [7월_18일])는 <이탈리아>의 귀족으로 [부르봉파르마] 가문의 시조였다. [스페인]의 부르봉왕가 초대 국왕 [펠리페_5세]와 그의 아내 [이사벨_디_파르네시오] 사이에서 태어났으며, 후에 [파르마의_군주]이 되었다.",
+	"globalSId": [2364485, 2364486],
+	"entities": [{
+		"kbox_types": ["NULL"],
+		"st": 0,
+		"en_mention": 6,
+		"ancestor": "-2",
+		"eIdx": 0,
+		"st_mention": 0,
+		"en": 8,
+		"ne_type": "PERSON",
+		"keyword": "[필리포 1세]",
+		"e_type": "NEW"
+	}, {
+		"kbox_types": ["Year", "TimePeriod"],
+		"st": 28,
+		"en_mention": 31,
+		"ancestor": "",
+		"eIdx": 1,
+		"st_mention": 26,
+		"en": 35,
+		"ne_type": "TIME",
+		"keyword": "[1720년]",
+		"e_type": "WIKILINK"
+	}, {
+		"kbox_types": ["NULL"],
+		"st": 36,
+		"en_mention": 38,
+		"ancestor": "",
+		"eIdx": 2,
+		"st_mention": 32,
+		"en": 44,
+		"ne_type": "TIME",
+		"keyword": "[3월_15일]",
+		"e_type": "WIKILINK"
+	}, {
+		"kbox_types": ["Year", "Agent", "EducationalInstitution", "TimePeriod", "Organisation", "University"],
+		"st": 47,
+		"en_mention": 46,
+		"ancestor": "",
+		"eIdx": 3,
+		"st_mention": 41,
+		"en": 54,
+		"ne_type": "TIME",
+		"keyword": "[1765년]",
+		"e_type": "WIKILINK"
+	}, {
+		"kbox_types": ["NULL"],
+		"st": 55,
+		"en_mention": 53,
+		"ancestor": "",
+		"eIdx": 4,
+		"st_mention": 47,
+		"en": 63,
+		"ne_type": "TIME",
+		"keyword": "[7월_18일]",
+		"e_type": "WIKILINK"
+	}, {
+		"kbox_types": ["Country", "PopulatedPlace", "Settlement", "PopulatedPlace", "Place"],
+		"st": 66,
+		"en_mention": 60,
+		"ancestor": "",
+		"eIdx": 5,
+		"st_mention": 56,
+		"en": 72,
+		"ne_type": "LOCATION",
+		"keyword": "<이탈리아>",
+		"e_type": "ELU"
+	}, {
+		"kbox_types": ["NULL"],
+		"st": 79,
+		"en_mention": 73,
+		"ancestor": "-2",
+		"eIdx": 6,
+		"st_mention": 67,
+		"en": 87,
+		"ne_type": "ETC",
+		"keyword": "[부르봉파르마]",
+		"e_type": "NEW"
+	}, {
+		"kbox_types": ["Country", "PopulatedPlace", "Settlement", "PopulatedPlace", "Place"],
+		"st": 98,
+		"en_mention": 87,
+		"ancestor": "",
+		"eIdx": 7,
+		"st_mention": 84,
+		"en": 103,
+		"ne_type": "LOCATION",
+		"keyword": "[스페인]",
+		"e_type": "WIKILINK"
+	}, {
+		"kbox_types": ["Royalty", "BritishRoyalty", "Agent", "Person"],
+		"st": 117,
+		"en_mention": 107,
+		"ancestor": "",
+		"eIdx": 8,
+		"st_mention": 101,
+		"en": 125,
+		"ne_type": "PERSON",
+		"keyword": "[펠리페_5세]",
+		"e_type": "WIKILINK"
+	}, {
+		"kbox_types": ["Royalty", "BritishRoyalty", "Agent", "Person"],
+		"st": 133,
+		"en_mention": 126,
+		"ancestor": "",
+		"eIdx": 9,
+		"st_mention": 115,
+		"en": 146,
+		"ne_type": "PERSON",
+		"keyword": "[이사벨_디_파르네시오]",
+		"e_type": "WIKILINK"
+	}, {
+		"kbox_types": ["NULL"],
+		"st": 162,
+		"en_mention": 148,
+		"ancestor": "",
+		"eIdx": 10,
+		"st_mention": 142,
+		"en": 171,
+		"ne_type": "ETC",
+		"keyword": "[파르마의_군주]",
+		"e_type": "WIKILINK"
+	}],
+	"wikiPageId": 585033,
+	"pIdx": 1,
+	"plainText": "필리포 1세(Felipe I de Parma, 1720년 3월 15일 ~ 1765년 7월 18일)는 이탈리아의 귀족으로 부르봉파르마 가문의 시조였다. 스페인의 부르봉왕가 초대 국왕 펠리페 5세와 그의 아내 이사벨 디 파르네시오 사이에서 태어났으며, 후에 파르마 공작이 되었다.",
+	"pronouns": [{
+		"st": 127,
+		"ancestor": "1-8",
+		"proIdx": 0,
+		"en": 127,
+		"cwStateCd": "FIXED",
+		"cwSelIdx": 18,
+		"type": "PRONOUN",
+		"keyword": "그"
+	}, {
+		"st": 127,
+		"ancestor": "-2",
+		"proIdx": 1,
+		"en": 131,
+		"cwStateCd": "FIXED",
+		"cwSelIdx": [],
+		"type": "PRONOUN",
+		"keyword": "그의 아내"
+	}, {
+		"st": 127,
+		"ancestor": "-2",
+		"proIdx": 2,
+		"en": 145,
+		"cwStateCd": "FIXED",
+		"cwSelIdx": [],
+		"type": "PRONOUN",
+		"keyword": "그의 아내 [이사벨_디_파르네시오]"
+	}, {
+		"st": 127,
+		"ancestor": "-2",
+		"proIdx": 3,
+		"en": 150,
+		"cwStateCd": "FIXED",
+		"cwSelIdx": [],
+		"type": "PRONOUN",
+		"keyword": "그의 아내 [이사벨_디_파르네시오] 사이에서"
+	}],
+	"mentionTagged": "[필리포 1세](Felipe I de Parma, [1720년] [3월 15일] ~ [1765년] [7월 18일])는 [이탈리아]의 귀족으로 [부르봉파르마] 가문의 시조였다. [스페인]의 부르봉왕가 초대 국왕 [펠리페 5세]와 그의 아내 [이사벨 디 파르네시오] 사이에서 태어났으며, 후에 [파르마 공작]이 되었다."
+}
+```
+    
+
 
 ## Evaluation results (baseline)
 to be announced
